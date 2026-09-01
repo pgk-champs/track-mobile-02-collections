@@ -1,0 +1,19 @@
+name: Проверка
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Проверка
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+
+      - name: Запуск тестов
+        run: ./gradlew test --no-daemon
